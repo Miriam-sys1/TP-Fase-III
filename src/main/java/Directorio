@@ -1,0 +1,52 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Directorio {
+    private List<Contacto> contactos;
+
+    public Directorio() {
+        this.contactos = new ArrayList<>();
+    }
+
+    public void agregarContacto(Contacto contacto) {
+        contactos.add(contacto);
+    }
+
+    public void modificarContacto(String nombre, String nuevoTelefono) {
+        for (Contacto contacto : contactos) {
+            if (contacto.getNombre().equals(nombre)) {
+                contacto.setTelefono(nuevoTelefono);
+                break; // Puedes romper el bucle una vez que se ha encontrado y modificado el contacto.
+            }
+        }
+    }
+
+    public String consultarContacto(String nombre) {
+        for (Contacto contacto : contactos) {
+            if (contacto.getNombre().equals(nombre)) {
+                return contacto.getTelefono();
+            }
+        }
+        return "Contacto no encontrado";
+    }
+
+    // Otros métodos según tus necesidades.
+
+    public static void main(String[] args) {
+        // Ejemplo de uso
+        Directorio directorio = new Directorio();
+
+        Contacto contacto1 = new Contacto("Juan Pérez", "123-456-7890");
+        Contacto contacto2 = new Contacto("María González", "987-654-3210");
+
+        directorio.agregarContacto(contacto1);
+        directorio.agregarContacto(contacto2);
+
+        // Modificar un contacto
+        directorio.modificarContacto("Juan Pérez", "555-555-5555");
+
+        // Consultar un contacto
+        String telefonoConsulta = directorio.consultarContacto("Juan Pérez");
+        System.out.println("Teléfono de Juan Pérez: " + telefonoConsulta);
+    }
+}
